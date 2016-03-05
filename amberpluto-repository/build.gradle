@@ -1,3 +1,12 @@
 group 'com.lofitskyi'
 version '1.0'
 
+dependencies {
+    compile 'org.springframework:spring-core:4.2.5.RELEASE'
+
+    compile 'mysql:mysql-connector-java:5.1.38'
+    compile 'org.apache.commons:commons-dbcp2:2.1.1'
+    compile 'org.hibernate:hibernate-entitymanager:5.1.0.Final'
+    compile 'javax.transaction:jta:1.1'
+    compile 'org.springframework.data:spring-data-jpa:1.9.4.RELEASE'
+}
