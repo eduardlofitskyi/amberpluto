@@ -1,2 +1,5 @@
 rootProject.name = 'amberpluto'
+include 'amberpluto-webapi'
+include 'amberpluto-repository'
+include 'amberpluto-service'
 
