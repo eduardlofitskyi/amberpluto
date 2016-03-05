@@ -1,6 +1,8 @@
 group 'com.lofitskyi'
 version '1.0'
 
+apply plugin: 'war'
+
 dependencies {
     compile project(':amberpluto-repository')
 
