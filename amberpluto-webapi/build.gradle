@@ -5,6 +5,7 @@ apply plugin: 'war'
 
 dependencies {
     compile project(':amberpluto-repository')
+    compile project(':amberpluto-service')
 
     compile 'org.springframework:spring-webmvc:4.2.5.RELEASE'
     compile 'javax.servlet:javax.servlet-api:3.1.0'
