@@ -1,25 +1,24 @@
 package com.lofitskyi.controller;
 
 import com.lofitskyi.entity.State;
+import com.lofitskyi.service.StateService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/state")
+@RequestMapping("/rest/state")
 public class StateController {
 
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
-    public State getState(){
-        return mockState();
-    }
+    @Autowired
+    private StateService service;
 
-    private State mockState() {
-        State state = new State();
-        state.setId(1);
-        state.setName("New York");
-        state.setShortName("NY");
-        return state;
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    public List<State> getAllState(){
+        return service.getAll();
     }
 }
