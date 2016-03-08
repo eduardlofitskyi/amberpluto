@@ -20,7 +20,7 @@ public class State {
     @Column(name = "short_name", nullable = false, length = 3)
     private String shortName;
 
-    @OneToMany(mappedBy = "state")
+    @OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
     private Set<City> cities;
 
     public State() {
