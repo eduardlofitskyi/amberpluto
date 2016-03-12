@@ -16,7 +16,7 @@ public class City {
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "state_id")
     private State state;
 
