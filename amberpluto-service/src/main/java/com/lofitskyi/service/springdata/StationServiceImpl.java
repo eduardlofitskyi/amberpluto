@@ -21,6 +21,6 @@ public class StationServiceImpl implements StationService{
 
     @Override
     public List<Station> getByCityId(Long id) {
-        return null;
+        return repository.getByCityId(id);
     }
 }

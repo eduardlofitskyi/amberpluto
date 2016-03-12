@@ -20,4 +20,9 @@ public class StationController {
     public List<Station> getAll(){
         return service.getAll();
     }
+
+    @RequestMapping(value = "/get/city", method = RequestMethod.GET)
+    public List<Station> getByCity(){
+        return service.getByCityId(1L);
+    }
 }
