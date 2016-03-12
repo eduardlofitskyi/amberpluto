@@ -20,6 +20,7 @@ public class Station {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "state_id")
+    @JsonIgnore
     private City city;
 
     public Station() {
