@@ -3,6 +3,7 @@ package com.lofitskyi.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,9 +20,6 @@ public class State {
 
     @Column(name = "short_name", nullable = false, length = 3)
     private String shortName;
-
-    @OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
-    private Set<City> cities;
 
     public State() {
     }
@@ -50,11 +48,4 @@ public class State {
         this.shortName = shortName;
     }
 
-    public Set<City> getCities() {
-        return cities;
-    }
-
-    public void setCities(Set<City> cities) {
-        this.cities = cities;
-    }
 }
