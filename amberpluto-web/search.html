@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="restGetAllStates(); restGetAllCities();">
+    <form id="search_form">
+        <select id="state_select" onchange="getCitiesByState()">
+            <option selected="selected" disabled>Any state/province</option>
+        </select>
+        <select id="city_select">
+            <option selected="selected" disabled>Select origin</option>
+        </select>
+    </form>
+
+    <script src="js/libs/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
