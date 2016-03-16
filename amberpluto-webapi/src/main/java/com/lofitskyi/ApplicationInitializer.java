@@ -17,6 +17,7 @@ public class ApplicationInitializer implements WebApplicationInitializer {
 
     public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
+        ctx.getEnvironment().setActiveProfiles("prod");
         ctx.register(WebConfig.class);
         servletContext.addListener(new ContextLoaderListener(ctx));
 
