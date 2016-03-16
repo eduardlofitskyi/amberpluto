@@ -3,6 +3,7 @@ package com.lofitskyi.controller;
 import com.lofitskyi.entity.City;
 import com.lofitskyi.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,9 +22,9 @@ public class CityController {
         return service.getAll();
     }
 
-    @RequestMapping(value = "/getCity", method = RequestMethod.GET)
-    public List<City> getCity(){
-        return service.getByStateId(1L);
+    @RequestMapping(value = "/get/state/{state}", method = RequestMethod.GET)
+    public List<City> getCity(@PathVariable long state){
+        return service.getByStateId(state);
     }
 
 }
