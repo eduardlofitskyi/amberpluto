@@ -31,7 +31,7 @@ var restGetAllCities = function () {
         success: function(data) {
             var cities = data;
             for (var i = 0; i < cities.length; i++){
-                $('#city_select').append('<option value="' + cities[i].id + '">' + cities[i].name + '</option>');
+                $('#city_select').append('<option value="' + cities[i].id + '">' + cities[i].name + ', ' + cities[i].state.shortName + '</option>');
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -55,7 +55,7 @@ var getCitiesByState = function(){
         success: function(data) {
             var cities = data;
             for (var i = 0; i < cities.length; i++){
-                $('#city_select').append('<option value="' + cities[i].id + '">' + cities[i].name + '</option>');
+                $('#city_select').append('<option value="' + cities[i].id + '">' + cities[i].name + ', ' + cities[i].state.shortName + '</option>');
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
