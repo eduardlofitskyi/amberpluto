@@ -19,7 +19,7 @@ public class Station {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "state_id")
+    @JoinColumn(name = "city_id")
     @JsonIgnore
     private City city;
 
