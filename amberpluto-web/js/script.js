@@ -2,7 +2,8 @@ var ip = 'http://localhost:';
 var port = '8080/';
 var prefix = ip + port + 'rest/';
 
-var defaultCity = '<option selected="selected" disabled>Select origin</option>';
+var defaultCityDeparture = '<option selected="selected" disabled>Select origin</option>';
+var defaultCityArrival = '<option selected="selected" disabled>Select destination</option>';
 
 var restGetAllStates = function () {
     $.ajax({
@@ -13,7 +14,7 @@ var restGetAllStates = function () {
         success: function(data) {
             var states = data;
             for (var i = 0; i < states.length; i++){
-                $('#state_select').append('<option value="' + states[i].id + '">' + states[i].name + ', ' + states[i].shortName +'</option>');
+                $('#state_select').append('<option value="' + states[i].id + '">' + states[i].name + '</option>');
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -40,12 +41,9 @@ var restGetAllCities = function () {
     })
 };
 
-
-
 var getCitiesByState = function(){
-    removeCities();
+    removeCitiesDeparture();
     var id = $('#state_select').val();
-    console.log(id);
 
     $.ajax({
         type: 'GET',
@@ -65,10 +63,58 @@ var getCitiesByState = function(){
 
 };
 
-var removeCities = function(){
+var getDestinationCityByOrigin = function (){
+    removeCitiesArrival();
+    var id = $('#city_select').val();
+
+    $.ajax({
+        type: 'GET',
+        url: prefix + "route/get/city/" + id,
+        dataType: 'json',
+        async: true,
+        success: function(data) {
+            var routes = data;
+            var city;
+            for (var i = 0; i < routes.length; i++){
+                city = routes[i].arrivalStation.city;
+                $('#city_select_arrival').append('<option value="' + city.id + '">' + city.name + ', ' + city.state.shortName + '</option>');
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.status + ' ' + jqXHR.responseText);
+        }
+    })
+
+    $('#city_select_arrival').prop('disabled', false);
+}
+
+var removeCitiesDeparture = function(){
     $('#city_select')
         .empty()
-        .append(defaultCity);
-    console.log('set default');
+        .append(defaultCityDeparture);
 };
 
+var removeCitiesArrival = function(){
+    $('#city_select_arrival')
+        .empty()
+        .append(defaultCityArrival);
+};
+
+var enableDepartureDate = function() {
+    $('#datepicker_departure').prop('disabled', false);
+}
+
+var enablePassengersNumber = function(){
+    $('#passengers_number').prop('disabled', false);
+}
+
+$('#passengers_number').keyup(function () {
+    this.value = this.value.replace(/[^0-9]/g,'');
+});
+
+$(document).ready(function() {
+    $( "#datepicker_departure" ).datepicker({
+        minDate: '0',
+        maxDate: '+60D'
+    });
+});
