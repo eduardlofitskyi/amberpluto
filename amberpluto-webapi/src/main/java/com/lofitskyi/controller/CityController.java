@@ -23,7 +23,7 @@ public class CityController {
     }
 
     @RequestMapping(value = "/get/state/{state}", method = RequestMethod.GET)
-    public List<City> getCity(@PathVariable long state){
+    public List<City> getCitiesByState(@PathVariable long state){
         return service.getByStateId(state);
     }
 
