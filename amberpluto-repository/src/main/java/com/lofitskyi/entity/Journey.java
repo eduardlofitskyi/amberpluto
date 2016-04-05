@@ -3,6 +3,7 @@ package com.lofitskyi.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "journies")
@@ -14,7 +15,10 @@ public class Journey {
     private long id;
 
     @Column(name = "seats")
-    private int avilableSeats;
+    private int availableSeats;
+
+    @Column(name = "departure_time")
+    private LocalDateTime departureTime;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "route_id")
@@ -36,12 +40,12 @@ public class Journey {
         this.id = id;
     }
 
-    public int getAvilableSeats() {
-        return avilableSeats;
+    public int getAvailableSeats() {
+        return availableSeats;
     }
 
-    public void setAvilableSeats(int avilableSeats) {
-        this.avilableSeats = avilableSeats;
+    public void setAvailableSeats(int availableSeats) {
+        this.availableSeats = availableSeats;
     }
 
     public Route getRoute() {
@@ -66,5 +70,13 @@ public class Journey {
 
     public void setDriver(Driver driver) {
         this.driver = driver;
+    }
+
+    public LocalDateTime getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(LocalDateTime departureTime) {
+        this.departureTime = departureTime;
     }
 }
