@@ -8,7 +8,7 @@
     <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css">
 </head>
 <body onload="restGetAllStates(); restGetAllCities();">
-    <form id="search_form">
+    <form id="search_form" action="result.html">
         <select id="state_select" onchange="getCitiesByState()">
             <option selected="selected" disabled>Any state/province</option>
         </select>
@@ -21,8 +21,9 @@
 
         <input type="text" id="datepicker_departure" onchange="enablePassengersNumber()" disabled >
 
-        <input type="text" id="passengers_number" maxlength="2" disabled>
+        <input type="text" id="passengers_number" maxlength="2" minlength="1" onchange="enableSubmitButton()" disabled>
 
+        <input type="submit" id="submit_button" value="Search" disabled>
     </form>
 
     <script src="js/libs/jquery.min.js"></script>

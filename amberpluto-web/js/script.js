@@ -86,7 +86,7 @@ var getDestinationCityByOrigin = function (){
     })
 
     $('#city_select_arrival').prop('disabled', false);
-}
+};
 
 var removeCitiesDeparture = function(){
     $('#city_select')
@@ -102,11 +102,15 @@ var removeCitiesArrival = function(){
 
 var enableDepartureDate = function() {
     $('#datepicker_departure').prop('disabled', false);
-}
+};
 
 var enablePassengersNumber = function(){
     $('#passengers_number').prop('disabled', false);
-}
+};
+
+var enableSubmitButton = function(){
+    $('#submit_button').prop('disabled', false);
+};
 
 $('#passengers_number').keyup(function () {
     this.value = this.value.replace(/[^0-9]/g,'');
