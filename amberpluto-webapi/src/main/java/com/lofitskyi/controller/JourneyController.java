@@ -4,11 +4,13 @@ import com.lofitskyi.entity.Journey;
 import com.lofitskyi.repository.JourneyRepository;
 import com.lofitskyi.service.JourneyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -24,9 +26,11 @@ public class JourneyController {
     }
 
 
-    @RequestMapping(value = "/get/{source}/{destination}", method = RequestMethod.GET)
+    @RequestMapping(value = "/get/{source}/{destination}/{date}", method = RequestMethod.GET)
     public List<Journey> getAllDrivers(@PathVariable long source,
-                                       @PathVariable long destination){
-        return service.getBySourceDestDate(source,destination, "2000");
+                                       @PathVariable long destination,
+                                       @PathVariable @DateTimeFormat(pattern="dd-MM-yyyy") LocalDate date){
+        System.out.println(date);
+        return service.getBySourceDestDate(source,destination, date);
     }
 }

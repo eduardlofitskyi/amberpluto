@@ -11,4 +11,5 @@ dependencies {
     compile 'org.hibernate:hibernate-entitymanager:5.1.0.Final'
     compile 'javax.transaction:jta:1.1'
     compile 'org.springframework.data:spring-data-jpa:1.9.4.RELEASE'
+    compile 'org.hibernate:hibernate-java8:5.1.0.Final'
 }
