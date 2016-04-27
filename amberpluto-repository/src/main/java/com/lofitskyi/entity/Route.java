@@ -58,4 +58,23 @@ public class Route {
     public void setEstablishedPrice(float establishedPrice) {
         this.establishedPrice = establishedPrice;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Route route = (Route) o;
+
+        if (!departureStation.equals(route.departureStation)) return false;
+        return arrivalStation.equals(route.arrivalStation);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = departureStation.hashCode();
+        result = 31 * result + arrivalStation.hashCode();
+        return result;
+    }
 }

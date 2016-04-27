@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RouteServiceImpl implements RouteService{
@@ -21,7 +22,11 @@ public class RouteServiceImpl implements RouteService{
 
     @Override
     public List<Route> getRoutesBySourceCityId(Long cityId) {
-        return repository.getByCityId(cityId);
+        return repository.getByCityId(cityId)
+                .parallelStream()
+                .distinct()
+                .collect(Collectors.toList());
+
     }
 
     @Override

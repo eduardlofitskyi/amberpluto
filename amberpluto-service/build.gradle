@@ -3,4 +3,6 @@ version '1.0'
 
 dependencies {
     compile project(':amberpluto-repository')
+
+    compile 'javax.mail:mail:1.4.7'
 }
