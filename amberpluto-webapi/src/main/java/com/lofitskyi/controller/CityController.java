@@ -27,4 +27,8 @@ public class CityController {
         return service.getByStateId(state);
     }
 
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    public City getCityById(@PathVariable long id){
+        return service.getOne(id);
+    }
 }

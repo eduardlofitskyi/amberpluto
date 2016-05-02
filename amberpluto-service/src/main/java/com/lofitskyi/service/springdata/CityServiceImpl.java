@@ -16,6 +16,11 @@ public class CityServiceImpl implements CityService{
     private CityRepository repository;
 
     @Override
+    public City getOne(long id) {
+        return repository.findOne(id);
+    }
+
+    @Override
     public List<City> getAll() {
         return repository.findAll();
     }
