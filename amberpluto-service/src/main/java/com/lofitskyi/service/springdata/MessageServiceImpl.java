@@ -13,6 +13,6 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public void sendToAdmin(Message message) {
         Sender sender = new Sender(EMAIL, PASSWORD);
-        sender.send("From main-page form", "From: " + message.getName() + "\n" + message.getText(), message.getFrom(), EMAIL);
+        sender.send("From main-page form", "From: " + message.getName() + " [" + message.getFrom() + "]" + "\n" + message.getText(), message.getFrom(), EMAIL);
     }
 }

@@ -15,9 +15,9 @@ public class EmailController {
     @Autowired
     MessageService service;
 
-    @RequestMapping(value = "/question", method = RequestMethod.PUT)
-    public Message sendQuestion(@RequestBody Message message){
+    @RequestMapping(value = "/question", method = RequestMethod.POST)
+    public void sendQuestion(@RequestBody Message message){
         service.sendToAdmin(message);
-        return message;
+        System.out.println("success");
     }
 }
