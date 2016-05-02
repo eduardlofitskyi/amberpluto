@@ -27,6 +27,9 @@ public class Route {
     @Column(name = "price")
     private float establishedPrice;
 
+    @Column(name = "duration")
+    private int establishedTime;
+
     public long getId() {
         return id;
     }
@@ -57,6 +60,14 @@ public class Route {
 
     public void setEstablishedPrice(float establishedPrice) {
         this.establishedPrice = establishedPrice;
+    }
+
+    public int getEstablishedTime() {
+        return establishedTime;
+    }
+
+    public void setEstablishedTime(int establishedTime) {
+        this.establishedTime = establishedTime;
     }
 
     @Override
