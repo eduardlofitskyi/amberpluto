@@ -33,4 +33,9 @@ public class JourneyController {
         System.out.println(date);
         return service.getBySourceDestDate(source,destination, date);
     }
+
+    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    public Journey getOne(@PathVariable long id){
+        return service.getOne(id);
+    }
 }
