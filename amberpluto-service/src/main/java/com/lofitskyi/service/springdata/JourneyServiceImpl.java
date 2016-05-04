@@ -30,6 +30,11 @@ public class JourneyServiceImpl implements JourneyService{
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Journey getOne(long id) {
+        return repository.findOne(id);
+    }
+
     public boolean withinDay(LocalDate expectedDate, LocalDateTime actualTime){
         if (expectedDate == null || actualTime == null) return false;
 
