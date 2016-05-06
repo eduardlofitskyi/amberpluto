@@ -13,8 +13,23 @@
     <link rel="stylesheet" href="assets/css/main.css" />
     <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
     <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+
+<style>
+    html, body {
+        height: 100%;
+    }
+    #map {
+        height: 60%;
+    }
+    #floating-panel {
+        text-align: center;
+        z-index: 5;
+        margin-top: -30px;
+        padding-bottom: 30px;
+    }
+</style>
 </head>
-<body onload="searchTripByMainParams()">
+<body onload="showDetailOnTrip()">
 
 <!-- Header -->
 <header id="header">
@@ -35,33 +50,30 @@
     <section id="main" class="wrapper">
         <div class="inner">
             <section>
-                <h2>Your suggested trip</h2>
-                <div id="search_label">
+                <div class="row">
+                    <div id="a_point" class="4u 12u$(medium)">
+
+                    </div>
+                    <div id="b_point" class="4u 12u$(medium)">
+
+                    </div>
+                    <div id="sum_point" class="4u 12u$(medium)">
+
+                    </div>
                 </div>
 
-                <div class="table-wrapper">
-                    <table id="result_table">
-                        <thead>
-                        <tr>
-                            <th>Description</th>
-                            <th></th>
-                            <th>Duration</th>
-                            <th>Price</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-                </div>
-        </section>
-            </div>
+            </section>
+        </div>
     </section>
 </div>
-
+    <div id="map"></div>
+<section>
+    <div id="floating-panel" class="12u 12u$(medium)"><button class="button special big icon fa-paypal">BUY NOW</button></div>
+</section>
 <!-- Footer -->
 <footer id="footer" class="wrapper alt">
     <div class="inner">
+
         <ul class="menu">
             <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
         </ul>
@@ -78,6 +90,7 @@
 <script src="assets/js/main.js"></script>
 <script src="assets/js/jquery-ui.min.js"></script>
 <script src="js/script.js"></script>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCksmZco0-vWEIslDBTo9-AN9bw-4bXEGs&callback=initMap&language=en"
+        async defer></script>
 </body>
 </html>

@@ -220,7 +220,7 @@ function setGeneralTable(originId, destinationId, passengersNum, departureDate) 
             var trips = data;
             for (var i = 0; i < trips.length; i++){
                 console.log(trips[i].route.departureStation.name);
-                $('#result_table').find('tbody').append('<tr><td>' + trips[i].route.departureStation.name + ', ' + trips[i].route.departureStation.city.name + '<br>' + trips[i].route.arrivalStation.name + ', ' + trips[i].route.arrivalStation.city.name + '</td><td>' + trips[i].departureTime.hour + ':' + trips[i].departureTime.minute + '<br>' + (trips[i].departureTime.hour+2) + ':' + (trips[i].departureTime.minute+15) + '</td><td>' + minutesToHours(trips[i].route.establishedTime) + '</td><td><button class="button fit">BUY NOW!<br>$' + trips[i].route.establishedPrice*passengersNum + '</button></td></tr>');
+                $('#result_table').find('tbody').append('<tr><td><b>A: </b>' + trips[i].route.departureStation.name + ', ' + trips[i].route.departureStation.city.name + '<br><b>B: </b>' + trips[i].route.arrivalStation.name + ', ' + trips[i].route.arrivalStation.city.name + '</td><td>' + trips[i].departureTime.hour + ':' + trips[i].departureTime.minute + '<br>' + (trips[i].departureTime.hour+2) + ':' + (trips[i].departureTime.minute+15) + '</td><td>' + minutesToHours(trips[i].route.establishedTime) + '</td><td><a href="details.html?id=' + trips[i].id + '&passengers=' + passengersNum + '" class="button fit">BUY NOW!<br>$' + trips[i].route.establishedPrice*passengersNum + '</a></td></tr>');
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -233,3 +233,81 @@ function setGeneralTable(originId, destinationId, passengersNum, departureDate) 
 var minutesToHours = function (minutes) {
     return Math.floor(minutes / 60) + ':' + minutes % 60;
 };
+
+var showDetailOnTrip = function () {
+    var tripId = $.urlParam('id');
+    var passengers = $.urlParam('passengers');
+
+    var tripJSON = $.ajax({
+        type: 'GET',
+        url: prefix + "/journey/get/" + tripId,
+        dataType: 'json',
+        async: true,
+        success: function(data) {
+            console.log(data);
+
+            initMap(data);
+            setDetailLabel(data, passengers);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.status + ' ' + jqXHR.responseText);
+        }
+    });
+};
+function setDetailLabel(trip, passengers) {
+    var depMin = "00";
+    var arrMin = "00";
+    if (trip.departureTime.minute != 0) depMin=trip.departureTime.minute;
+    if (trip.departureTime.minute != 0) arrMin=trip.departureTime.minute;
+    $('#a_point').append('<b>A:</b> ' + trip.route.departureStation.name + '. ' + trip.route.departureStation.city.name + ', ' + trip.route.departureStation.city.state.shortName + '<br>');
+    $('#a_point').append(trip.departureTime.hour + ':' + depMin + ' - ' + trip.departureTime.month + ' ' + trip.departureTime.dayOfMonth + ', ' + trip.departureTime.year);
+    $('#b_point').append('<b>B:</b> ' + trip.route.arrivalStation.name + '. ' + trip.route.arrivalStation.city.name + ', ' + trip.route.arrivalStation.city.state.shortName + '<br>');
+    $('#b_point').append((trip.departureTime.hour + 3)+ ':' + arrMin + ' - ' + trip.departureTime.month + ' ' + trip.departureTime.dayOfMonth + ', ' + trip.departureTime.year);
+    $('#sum_point').append('PASSENGER(S): ' + passengers + '<br>');
+    $('#sum_point').append('PRICE: $' + (passengers * trip.route.establishedPrice));
+}
+
+
+function initMap(trip) {
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 2,
+        //center: {lat: 41.85, lng: -87.65},
+        disableDefaultUI: true,
+        mapTypeId: google.maps.MapTypeId.HYBRID,
+        scrollwheel: false,
+        draggable: false,
+        styles: [{
+            "featureType": "road",
+            "elementType": "road",
+            "stylers": [{
+                "visibility": "off"
+            }]
+        }, {
+            "featureType": "administrative.locality",
+            "elementType": "labels",
+            "stylers": [{
+                "visibility": "off"
+            }]
+        }, {}]
+    });
+    directionsDisplay.setMap(map);
+
+    calculateAndDisplayRoute(directionsService, directionsDisplay, trip.route.departureStation, trip.route.arrivalStation);
+
+}
+
+function calculateAndDisplayRoute(directionsService, directionsDisplay, departure, arrival) {
+    directionsService.route({
+        origin: departure.name + ', ' + departure.city.name + ' ' + departure.city.state.shortName,
+        destination: arrival.name + ', ' + arrival.city.name + ' ' + arrival.city.state.shortName,
+        travelMode: google.maps.TravelMode.DRIVING
+    }, function(response, status) {
+        if (status === google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(response);
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    });
+}

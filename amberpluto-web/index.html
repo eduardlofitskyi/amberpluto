@@ -1,0 +1,260 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>AmberPluto - make your best trip</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<link href="assets/css/jquery-ui.theme.min.css" rel="stylesheet" type="text/css">
+    	<link href="assets/css/jquery-ui.structure.min.css" rel="stylesheet" type="text/css">
+    	<link href="assets/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+	</head>
+	<body  onload="restGetAllStates(); restGetAllCities();">
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">Booking</a></li>
+							<li><a href="#one">Who we are</a></li>
+							<li><a href="#two">What we do</a></li>
+							<li><a href="#three">Get in touch</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>AmberPluto Bus</h1>
+							<p>Safe, convient, low cost, daily express bus in your country. Book your travel right now!</p>
+							
+							<ul class="actions">
+								<form method="get" action="result.html">
+									<div class="field half first" >
+										<label for="state_select">Display origins in:</label>
+										<div class="select-wrapper">
+											<select id="state_select" onchange="getCitiesByState()">
+												<option selected="selected" disabled>Any state/province</option>
+											</select>
+										</div>
+									</div>
+									
+									<div class="field half" >
+										<label for="city_select">Traveling from:</label>
+										<div class="select-wrapper">
+											<select id="city_select" name="origin" onchange="getDestinationCityByOrigin()">
+												<option selected="selected" disabled>Select origin</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="field half first" >
+										<label for="city_select_arrival">Traveling to:</label>
+										<div class="select-wrapper">
+											<select id="city_select_arrival" name="destination" onchange="enablePassengersNumber()" disabled>
+												<option selected="selected" disabled>Select destination</option>
+											</select>
+										</div>
+									</div>
+
+									<div class="field half" >
+										<label for="passengers_number">Passengers:</label>
+										<input type="number" id="passengers_number" min="1" max="50" placeholder="Numbers of passengers" name="passengers" onchange="enableDepartureDate()" disabled>
+									</div>
+
+									<div class="field half first">
+										<label for="datepicker_departure">Departing on:</label>
+										<input type="text" id="datepicker_departure" placeholder="Date of departing" name="date" onchange="enableSubmitButton(); showDate()" disabled>
+									</div>
+									
+									<label></label>
+									<div class="field half">
+											<label>Search type:</label>
+											<div class="field half">
+												<input type="radio" id="demo-priority-low" name="exact_date" checked>
+												<label for="demo-priority-low">Exact date</label>
+											</div>
+											<div class="field half">
+												<input type="radio" id="demo-priority-normal" name="exact_date">
+												<label for="demo-priority-normal">+/- 3 days</label>
+											</div>
+										
+									</div>
+									
+									<div class="12u 12u$(medium)">	
+										<ul class="action"><input type="submit" id="submit_button" value="Search" class="button special fit" disabled></ul>
+									</div>
+								</form>
+							</ul>
+						</div>
+					</section>
+
+				<!-- One -->
+					<section id="one" class="wrapper style2 spotlights">
+						<section>
+							<a href="#" class="image"><img src="images/pic01.jpg" alt="" data-position="center center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Modern buses</h2>
+									<p>Travel in comfort. High class and modern buses will make your trip unforgettable pleasant.</p>
+									<ul class="actions">
+										<li><a href="#" class="button">Learn more</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+						<section>
+							<a href="#" class="image"><img src="images/pic02.jpg" alt="" data-position="top center" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Regular passenger traffic</h2>
+									<p>Our company cooperates with leading companies in the field of passenger traffic, which guarantees maximum scope for choice</p>
+									<ul class="actions">
+										<li><a href="#" class="button">Learn more</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+						<section>
+							<a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>
+							<div class="content">
+								<div class="inner">
+									<h2>Professional support team</h2>
+									<p>Our team is working on a regular search and provides the most relevant areas for your trips, high-quality and convenient service. Our support team will answer any question.</p>
+									<ul class="actions">
+										<li><a href="#" class="button">Learn more</a></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+					</section>
+
+				<!-- Two -->
+					<section id="two" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>What we do</h2>
+							<p>Our objective is to offer tickets to a client at best price. We give full information on bus tour, level of safety and comfort, help to plan the best itinerary, and offer easy reservation and convenient payment methods.</p>
+							<div class="features">
+								<section>
+									<span class="icon major fa-usd"></span>
+									<h3>Prices</h3>
+									<p>On our site, prices are low and choice of bus tickets is wide – from 150 carriers. You pay only for your order, with no hidden fees or surcharges.</p>
+								</section>
+								<section>
+									<span class="icon major fa-lock"></span>
+									<h3>Payment Methods</h3>
+									<p>Pay for your bus tickets via any method that is convenient to you: your credit/debit card or WebMoney. Your transaction data is securely encrypted in accordance with the safety standards of our site.</p>
+								</section>
+								<section>
+									<span class="icon major fa-commenting"></span>
+									<h3>Customer support</h3>
+									<p>Operators of our Call Center are ready to help you round the clock, seven days a week. Information support is available in English, Russian, and Ukrainian languages.</p>
+								</section>
+								<section>
+									<span class="icon major fa-gift"></span>
+									<h3>Bonus program</h3>
+									<p>Purchase bus tickets, and we will return 1% of price to your bonus account. Earn bonuses and pay for travels with them. The more travels, the more bonuses.</p>
+								</section>
+							</div>
+							<ul class="actions">
+								<li><a href="#" class="button">Learn more</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- Three -->
+					<section id="three" class="wrapper style1 fade-up">
+						<div class="inner">
+							<h2>Get in touch</h2>
+							<p>Our support service is working 24/7. Operators of multi hotline will answer all your questions. Please call us if you have any questions, and our operators will help you. <br>
+							You can use form for a reverse communication at the bottom of the page to write a text message to the operator of Customer Support. The operator will review your question and answer to email</p>
+							<div class="split style1">
+								<section>
+									<form method="post" onsubmit="sendMessage()">
+										<div class="field half first">
+											<label for="name_message">Name</label>
+											<input type="text" name="name" id="name_message" />
+										</div>
+										<div class="field half">
+											<label for="email_message">Email</label>
+											<input type="text" name="email" id="email_message" />
+										</div>
+										<div class="field">
+											<label for="text_message">Message</label>
+											<textarea name="message" id="text_message" rows="5"></textarea>
+										</div>
+										<ul class="actions">
+											<li><input type="submit" class="button submit" value="Send Message"/></li>
+										</ul>
+									</form>
+								</section>
+								<section>
+									<ul class="contact">
+										<li>
+											<h3>Address</h3>
+											<span>349 First Street, Elizabeth<br />
+											New Jersey 07206<br />
+											USA</span>
+										</li>
+										<li>
+											<h3>Email</h3>
+											<a href="#">suppurt@amberpluto.com</a>
+										</li>
+										<li>
+											<h3>Phone</h3>
+											<span>1-800-343-9999</span>
+										</li>
+										<li>
+											<h3>Social</h3>
+											<ul class="icons">
+												<li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
+												<li><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>
+												<li><a href="#" class="fa-github"><span class="label">GitHub</span></a></li>
+												<li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>
+												<li><a href="#" class="fa-linkedin"><span class="label">LinkedIn</span></a></li>
+											</ul>
+										</li>
+									</ul>
+								</section>
+							</div>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+			<script src="assets/js/jquery-ui.min.js"></script>
+			<script src="js/script.js"></script>
+
+	</body>
+</html>
