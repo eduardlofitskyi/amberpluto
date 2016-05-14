@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -19,7 +21,9 @@ public class CityController {
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public List<City> getAllCities(){
-        return service.getAll();
+        List<City> list = service.getAll();
+        Collections.sort(list, (o1, o2) -> o1.getName().compareTo(o2.getName()));
+        return list;
     }
 
     @RequestMapping(value = "/get/state/{state}", method = RequestMethod.GET)

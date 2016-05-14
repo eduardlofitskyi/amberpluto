@@ -10,4 +10,6 @@ public interface JourneyService{
     List<Journey> getAll();
     List<Journey> getBySourceDestDate(long source, long destination, LocalDate date);
     Journey getOne(long id);
+
+    void buy(long id, int passengers);
 }

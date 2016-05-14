@@ -5,6 +5,7 @@ import com.lofitskyi.repository.JourneyRepository;
 import com.lofitskyi.service.JourneyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class JourneyServiceImpl implements JourneyService{
 
     @Autowired
@@ -33,6 +35,13 @@ public class JourneyServiceImpl implements JourneyService{
     @Override
     public Journey getOne(long id) {
         return repository.findOne(id);
+    }
+
+    @Override
+    public void buy(long id, int passengers) {
+        Journey trip = repository.getOne(id);
+        trip.setAvailableSeats(trip.getAvailableSeats()-passengers);
+        repository.save(trip);
     }
 
     public boolean withinDay(LocalDate expectedDate, LocalDateTime actualTime){
