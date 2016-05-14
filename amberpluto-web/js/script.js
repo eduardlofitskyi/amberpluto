@@ -118,6 +118,7 @@ $('#passengers_number').keyup(function () {
 
 $(document).ready(function() {
     $( "#datepicker_departure" ).datepicker({
+        dateFormat: 'dd-mm-yy',
         minDate: '0',
         maxDate: '+60D'
     });
@@ -248,6 +249,7 @@ var showDetailOnTrip = function () {
 
             initMap(data);
             setDetailLabel(data, passengers);
+            setDatailsButton(tripId, passengers);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             alert(jqXHR.status + ' ' + jqXHR.responseText);
@@ -311,3 +313,41 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay, departur
         }
     });
 }
+
+var checkCarNumber = function () {
+    console.log("In");
+    if ($('#input_card_num').val().length == 16){
+        $('#pay_submit').prop('disabled', false);
+        $('#card_num_err_message').text('Correct!');
+    }else {
+        $('#pay_submit').prop('disabled', true);
+        $('#card_num_err_message').text('Input correct card number');
+    }
+};
+
+var setSpinner = function () {
+    $('#main').empty();
+    $('#main').append('<div class="loader">Loading...</div>');
+};
+
+var setDatailsButton = function (id, passengers) {
+    $('#floating-panel').append('<a href="purchase.html?id=' + id + '&passengers=' + passengers + '" class="button special big icon fa-paypal">BUY NOW</a>')
+};
+
+var buy = function () {
+    var tripId = $.urlParam('id');
+    var passengers = $.urlParam('passengers');
+
+    $.ajax({
+        type: 'GET',
+        url: prefix + "/journey/buy/" + tripId + "/" + passengers,
+        dataType: 'json',
+        async: true,
+        success: function(data) {
+            console.log("Success");
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.status + ' ' + jqXHR.responseText);
+        }
+    });
+};

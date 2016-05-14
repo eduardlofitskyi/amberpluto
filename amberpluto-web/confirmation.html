@@ -14,22 +14,13 @@
     <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
     <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 
-<style>
-    html, body {
-        height: 100%;
-    }
-    #map {
-        height: 60%;
-    }
-    #floating-panel {
-        text-align: center;
-        z-index: 5;
-        margin-top: -30px;
-        padding-bottom: 30px;
-    }
-</style>
+    <style>
+        input {
+            text-align: center;
+        }
+    </style>
 </head>
-<body onload="showDetailOnTrip()">
+<body>
 
 <!-- Header -->
 <header id="header">
@@ -49,27 +40,13 @@
     <!-- Main -->
     <section id="main" class="wrapper">
         <div class="inner">
-            <section>
-                <div class="row">
-                    <div id="a_point" class="4u 12u$(medium)">
+                <h2 class="align-center">You have successfully bought tickets.<br> Check your e-mail</h2>
 
-                    </div>
-                    <div id="b_point" class="4u 12u$(medium)">
+                <a href="index.html" class="align-center button fit big">On Main Page</a>
 
-                    </div>
-                    <div id="sum_point" class="4u 12u$(medium)">
-
-                    </div>
-                </div>
-
-            </section>
         </div>
     </section>
 </div>
-    <div id="map"></div>
-<section>
-    <div id="floating-panel" class="12u 12u$(medium)"></div>
-</section>
 <!-- Footer -->
 <footer id="footer" class="wrapper alt">
     <div class="inner">
@@ -90,7 +67,6 @@
 <script src="assets/js/main.js"></script>
 <script src="assets/js/jquery-ui.min.js"></script>
 <script src="js/script.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCksmZco0-vWEIslDBTo9-AN9bw-4bXEGs&callback=initMap&language=en"
-        async defer></script>
+
 </body>
 </html>

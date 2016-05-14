@@ -44,16 +44,19 @@
                 <p style="text-align: center">Paid safety with PayPal<br><img src="http://www.tokyou-j.com/Newimages/paypal.png"></p>
 
 
-                    <form>
+                    <form onsubmit="setSpinner()" method="get" action="paid.html">
+                        <input id="hidden_journey" type="hidden" name="journey">
+                        <input id="hidden_passengers" type="hidden" name="passengers">
                         <div class="row">
                         <div class="field half first" >
-                            <label>Card number:</label>
-                            <input type="number" maxlength="16" minlength="16">
+                            <label for="input_card_num">Card number:</label>
+                            <input id="input_card_num" type="number" maxlength="16" minlength="16" required onkeyup="checkCarNumber()">
+                            <label id="card_num_err_message" style="text-align: center" hidden>Input correct card number</label>
                         </div>
                         <div class="field half" >
-                            <label>E-mail:</label>
-                            <input type="text"><br>
-                            <input type="submit" class="button fit" value="pay now"/>
+                            <label for="input_email">E-mail:</label>
+                            <input id="input_email" type="email" required><br>
+                            <input id="pay_submit" type="submit" class="button fit" value="pay now" disabled/>
                         </div>
                         </div>
                     </form>
