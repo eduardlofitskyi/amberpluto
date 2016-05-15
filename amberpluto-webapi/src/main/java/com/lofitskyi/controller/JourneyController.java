@@ -4,6 +4,7 @@ import com.lofitskyi.entity.Journey;
 import com.lofitskyi.entity.Ticket;
 import com.lofitskyi.repository.JourneyRepository;
 import com.lofitskyi.service.JourneyService;
+import com.lofitskyi.service.MessageService;
 import com.lofitskyi.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/journey")
+@RequestMapping("/journey")
 public class JourneyController {
 
     @Autowired
@@ -21,6 +22,9 @@ public class JourneyController {
 
     @Autowired
     private TicketService ticketService;
+
+    @Autowired
+    private MessageService messageService;
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public List<Journey> getAllDrivers(){
@@ -41,7 +45,7 @@ public class JourneyController {
         return service.getOne(id);
     }
 
-    @RequestMapping(value = "/buy/{id}/{passengers}/{email}", method = RequestMethod.GET)
+    @RequestMapping(value = "/buy/{id}/{passengers}/{email:.+}", method = RequestMethod.GET)
     public void buy(@PathVariable long id,
                     @PathVariable int passengers,
                     @PathVariable String email){
@@ -49,6 +53,7 @@ public class JourneyController {
         Journey current = service.getOne(id);
         String barcode = generateBarcode(current, email, passengers);
         ticketService.createOne(new Ticket(current, email, passengers, barcode));
+        messageService.sendToCustomerTicket(current, email, barcode);
     }
 
     private String generateBarcode(Journey current, String email, int passengers) {

@@ -1,6 +1,7 @@
 group 'com.lofitskyi'
 version '1.0'
 
+apply plugin: 'java'
 apply plugin: 'war'
 
 dependencies {
@@ -9,4 +10,8 @@ dependencies {
 
     compile 'org.springframework:spring-webmvc:4.2.5.RELEASE'
     compile 'javax.servlet:javax.servlet-api:3.1.0'
+}
+
+war {
+    from '../amberpluto-web'
 }

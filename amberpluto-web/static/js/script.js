@@ -334,20 +334,31 @@ var setDatailsButton = function (id, passengers) {
     $('#floating-panel').append('<a href="purchase.html?id=' + id + '&passengers=' + passengers + '" class="button special big icon fa-paypal">BUY NOW</a>')
 };
 
+var setHiddenValues = function () {
+    var trip = $.urlParam('id');
+    var passengers = $.urlParam('passengers');
+    $('#hidden_journey').val(trip);
+    $('#hidden_passengers').val(passengers);
+};
+
 var buy = function () {
     var tripId = $.urlParam('id');
     var passengers = $.urlParam('passengers');
+    var email = $.urlParam('email');
 
+    console.log(tripId);
+    console.log(passengers);
+    console.log(email);
     $.ajax({
         type: 'GET',
-        url: prefix + "/journey/buy/" + tripId + "/" + passengers,
+        url: prefix + "/journey/buy/" + tripId + "/" + passengers + "/" + email,
         dataType: 'json',
         async: true,
         success: function(data) {
             console.log("Success");
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.status + ' ' + jqXHR.responseText);
+            console.log("error");
         }
     });
 };

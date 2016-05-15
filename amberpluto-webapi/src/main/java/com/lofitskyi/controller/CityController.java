@@ -13,7 +13,7 @@ import java.util.Comparator;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/city")
+@RequestMapping("/city")
 public class CityController {
 
     @Autowired

@@ -20,7 +20,7 @@
     }
 </style>
 </head>
-<body>
+<body onload="setHiddenValues()">
 
 <!-- Header -->
 <header id="header">
@@ -45,7 +45,7 @@
 
 
                     <form onsubmit="setSpinner()" method="get" action="paid.html">
-                        <input id="hidden_journey" type="hidden" name="journey">
+                        <input id="hidden_journey" type="hidden" name="id">
                         <input id="hidden_passengers" type="hidden" name="passengers">
                         <div class="row">
                         <div class="field half first" >
@@ -55,7 +55,7 @@
                         </div>
                         <div class="field half" >
                             <label for="input_email">E-mail:</label>
-                            <input id="input_email" type="email" required><br>
+                            <input id="input_email" type="email" name="email" required><br>
                             <input id="pay_submit" type="submit" class="button fit" value="pay now" disabled/>
                         </div>
                         </div>
